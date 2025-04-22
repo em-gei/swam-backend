@@ -1,1 +1,20 @@
-spring.application.name=backend
+spring:
+  application:
+    name: bikeworld_be
+info:
+  build:
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
+management:
+  endpoints:
+    web:
+      base-path: /manage
+      exposure:
+        include: health,info,metrics
+server:
+  servlet:
+    context-path: /bikeworld
+logging:
+  application:
+    name: '@project.name@'

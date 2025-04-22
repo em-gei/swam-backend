@@ -1,0 +1,18 @@
+services:
+  mongodb:
+    container_name: bikeworld_db
+    command:
+      - --storageEngine
+      - wiredTiger
+      - --auth
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - ./mongodb/data:/data/db
+      - ./mongodb/seed.js:/docker-entrypoint-initdb.d/seed.js:ro

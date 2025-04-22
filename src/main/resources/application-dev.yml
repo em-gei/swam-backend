@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://app_user:4pp_p4ssw0rd@localhost:27017/bikeworld
+      auto-index-creation: true
