@@ -1,11 +1,14 @@
 package it.swam.backend.entity;
 
+import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.ObjectId;
+import lombok.experimental.Accessors;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -15,13 +18,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 @Builder
+@Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "users_sequence";
-
     @Id
-    private ObjectId id;
+    private String id;
 
     private String firstname;
 
@@ -35,5 +38,8 @@ public class User {
     private Integer postCount = 0;
 
     private Boolean active;
+
+    @CreatedDate
+    private LocalDateTime rowDate;
 
 }
