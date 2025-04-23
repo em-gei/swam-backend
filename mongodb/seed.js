@@ -10,7 +10,6 @@ db.createUser({
 });
 
 db.user.insert({
-  "id": 1,
   "firstname": "Ted",
   "lastname": "Mosby",
   "email": "ted@mosby.com",

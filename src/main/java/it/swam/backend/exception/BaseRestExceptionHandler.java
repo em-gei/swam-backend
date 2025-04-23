@@ -28,6 +28,13 @@ public class BaseRestExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(e, body, EMPTY, BAD_REQUEST, request);
     }
 
+    @ExceptionHandler({NotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleNotFound(NotFoundException e, WebRequest request) {
+        ProblemDetail body = this.getProblemDetail(e, HttpStatus.NOT_FOUND, request);
+        return this.handleExceptionInternal(e, body, e.getHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
     @NotNull
     protected ProblemDetail getProblemDetail(Exception e, HttpStatus status, WebRequest request) {
         var problemDetail = createProblemDetail(e, status, e.getMessage(), null, null, request);
