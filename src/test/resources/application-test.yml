@@ -3,3 +3,6 @@ spring:
     mongodb:
       port: 0 # random port
       auto-index-creation: true
+authentication:
+  user: test
+  pwd: test01
