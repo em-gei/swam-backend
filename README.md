@@ -9,7 +9,7 @@ Swagger URL: http://localhost:8090/bikeworld/swagger-ui/index.html
 ### Badges
 ![Build](https://github.com/em-gei/swam-backend/actions/workflows/ci.yml/badge.svg)
 
-[![Coverage Status](https://coveralls.io/repos/github/em-gei/swam-backend/badge.svg?branch=main)](https://coveralls.io/github/em-gei/swam-backend?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/em-gei/swam-backend/badge.svg?branch=main)](https://coveralls.io/github/em-gei/swam-backend?branch=develop)
 
 
 -- add coverage badge
