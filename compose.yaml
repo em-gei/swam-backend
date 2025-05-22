@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mongodb:
     container_name: bikeworld_db
@@ -10,9 +12,36 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    networks:
+      - bikeworld_network
     ports:
       - "27017:27017"
-    restart: always
+    restart: on-failure
     volumes:
-      - ./mongodb/data:/data/db
+#      - ./mongodb/data:/data/db
       - ./mongodb/seed.js:/docker-entrypoint-initdb.d/seed.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "-u", "${MONGO_INITDB_ROOT_USERNAME}", "-p", "${MONGO_INITDB_ROOT_PASSWORD}", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+
+  bikeworld:
+    container_name: bikeworld_app
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile
+    image: bikeworld
+    ports:
+      - "8090:8090"
+    networks:
+      - bikeworld_network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+networks:
+  bikeworld_network:
+    name: bikeworld_network
+    driver: bridge

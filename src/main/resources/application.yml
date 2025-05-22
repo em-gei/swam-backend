@@ -1,6 +1,13 @@
 spring:
   application:
     name: bikeworld_be
+  data:
+    mongodb:
+      uri: mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
+      auto-index-creation: true
+authentication:
+  user: prod
+  pwd: s3cur3_p4ssw0rd
 info:
   build:
     name: '@project.name@'
@@ -13,6 +20,7 @@ management:
       exposure:
         include: health,info,metrics
 server:
+  port: 8090
   servlet:
     context-path: /bikeworld
 logging:

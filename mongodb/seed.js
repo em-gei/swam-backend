@@ -1,3 +1,4 @@
+// Accesso al database specificato via env (valido solo per il primo avvio)
 db = db.getSiblingDB('bikeworld');
 
 db.createUser({
@@ -9,13 +10,14 @@ db.createUser({
   }]
 });
 
-db.user.insert({
-  "firstname": "Ted",
-  "lastname": "Mosby",
-  "email": "ted@mosby.com",
-  "post_count": 0,
-  "active": true
-});
-
+db.user.insertMany([
+  {
+    "firstname": "Ted",
+    "lastname": "Mosby",
+    "email": "ted@mosby.com",
+    "post_count": 0,
+    "active": true
+  }
+]);
 
 print("Database setup and initialization completed");
