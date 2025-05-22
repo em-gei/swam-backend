@@ -32,9 +32,11 @@ jobs:
           path: target/site/jacoco/
 
       - name: Upload coverage to Coveralls
-        run: mvn coveralls:report
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: target/site/jacoco/jacoco.xml
+          format: jacoco
   deploy:
     if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
     runs-on: ubuntu-latest
