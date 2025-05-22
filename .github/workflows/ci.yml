@@ -1,10 +1,10 @@
 name: CI/CD Pipeline
-# test
+
 on:
   push:
-    branches:
-      - 'feature/**'   # Run tests on any feature branch push
-      - 'develop'      # Trigger deploy on push to develop
+    branches: [ "develop", "feature/**" ]
+  pull_request:
+    branches: [ "develop" ]
 
 jobs:
   test:
