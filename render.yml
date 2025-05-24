@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: bikeworld-app
+    env: docker
+    repo: https://github.com/em-gei/swam-backend
+    dockerContext: .
+    dockerfilePath: src/main/docker/Dockerfile
+    plan: free
+    envVars:
+      - key: mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
+        fromService:
+          type: pserv
+          name: bikeworld-db
+          property: connectionString
+
+  - type: pserv
+    name: bikeworld-db
+    env: docker
+    dockerContext: .
+    dockerfilePath: mongodb/Dockerfile
+    plan: free
+    envVars:
+      - key: MONGO_INITDB_ROOT_USERNAME
+        value: root
+      - key: MONGO_INITDB_ROOT_PASSWORD
+        value: supersecret
+      - key: MONGO_INITDB_DATABASE
+        value: bikeworld
