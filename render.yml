@@ -10,11 +10,11 @@ services:
       - key: mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
         fromService:
           type: pserv
-          name: bikeworld-db
+          name: mongodb
           property: connectionString
 
   - type: pserv
-    name: bikeworld-db
+    name: mongodb
     env: docker
     dockerContext: .
     dockerfilePath: mongodb/Dockerfile
