@@ -21,6 +21,8 @@ USER spring-boot
 
 WORKDIR /app
 
+ENV MONGO_URI=mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
+
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8090

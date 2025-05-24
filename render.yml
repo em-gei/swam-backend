@@ -7,11 +7,8 @@ services:
     dockerfilePath: src/main/docker/Dockerfile
     plan: free
     envVars:
-      - key: mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
-        fromService:
-          type: pserv
-          name: mongodb
-          property: connectionString
+      - key: MONGO_URI
+        value: mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
 
   - type: pserv
     name: mongodb

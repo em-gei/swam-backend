@@ -40,6 +40,8 @@ services:
     depends_on:
       mongodb:
         condition: service_healthy
+    environment:
+      - MONGO_URI=mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
 
 networks:
   bikeworld_network:

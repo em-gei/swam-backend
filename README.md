@@ -40,4 +40,4 @@ To create docker image
 
 To run docker image
 
-```docker run --rm --network backend_bikeworld_networks --name=bikeworld_app_container bikeworld_app```
+```docker run --rm --network backend_bikeworld_networks --name=bikeworld_app_container -e MONGO_URI=mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld bikeworld_app```

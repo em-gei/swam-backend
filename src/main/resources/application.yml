@@ -3,7 +3,7 @@ spring:
     name: bikeworld_be
   data:
     mongodb:
-      uri: mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
+      uri: ${MONGO_URI}
       auto-index-creation: true
 authentication:
   user: prod
