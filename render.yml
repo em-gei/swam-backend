@@ -6,3 +6,4 @@ services:
     dockerContext: .
     dockerfilePath: src/main/docker/Dockerfile
     plan: free
+    healthCheckPath: /bikeworld/manage/health
