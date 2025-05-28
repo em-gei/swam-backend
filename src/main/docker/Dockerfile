@@ -21,9 +21,10 @@ USER spring-boot
 
 WORKDIR /app
 
-ENV MONGO_URI=mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
-
 COPY --from=build /app/target/*.jar app.jar
 
+# Declare MONGO_URI to be set at runtime
+ENV MONGO_URI="mongodb+srv://app_user:4pp_p4ssw0rd@bikeworld.tn95ywq.mongodb.net/bikeworld?retryWrites=true&w=majority&appName=bikeworld"
+
 EXPOSE 8090
-CMD ["java", "-jar", "app.jar"]
+CMD ["sh", "-c", "java -Dspring.data.mongodb.uri=$MONGO_URI -jar app.jar"]

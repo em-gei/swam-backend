@@ -6,20 +6,3 @@ services:
     dockerContext: .
     dockerfilePath: src/main/docker/Dockerfile
     plan: free
-    envVars:
-      - key: MONGO_URI
-        value: mongodb://app_user:4pp_p4ssw0rd@mongodb:27017/bikeworld
-
-  - type: pserv
-    name: mongodb
-    env: docker
-    dockerContext: .
-    dockerfilePath: mongodb/Dockerfile
-    plan: free
-    envVars:
-      - key: MONGO_INITDB_ROOT_USERNAME
-        value: root
-      - key: MONGO_INITDB_ROOT_PASSWORD
-        value: supersecret
-      - key: MONGO_INITDB_DATABASE
-        value: bikeworld

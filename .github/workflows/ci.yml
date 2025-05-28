@@ -1,6 +1,8 @@
 name: CI/CD Pipeline
 
 on:
+  push:
+    branches: [ develop ]
   pull_request:
     types: [opened, synchronize]
   pull_request_target:
@@ -8,7 +10,7 @@ on:
 
 jobs:
   test:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/develop')
     runs-on: ubuntu-latest
 
     steps:
@@ -40,7 +42,8 @@ jobs:
           format: jacoco
 
   deploy:
-    if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    needs: test
+    if: (github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true) || (github.event_name == 'push' && github.ref == 'refs/heads/develop')
     runs-on: ubuntu-latest
 
     steps:
