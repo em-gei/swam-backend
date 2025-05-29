@@ -4,15 +4,17 @@ Run ```docker compose up -d --build```
 
 This command starts MongoDb inside a docker container
 
-Swagger URL: http://localhost:8090/bikeworld/swagger-ui/index.html
+### Swagger URLs
+- local: http://localhost:8090/bikeworld/swagger-ui/index.html
+- production: https://swam-backend.onrender.com/bikeworld/swagger-ui/index.html
 
 ### Badges
 ![Build](https://github.com/em-gei/swam-backend/actions/workflows/ci.yml/badge.svg)
 
-[![Coverage Status](https://coveralls.io/repos/github/em-gei/swam-backend/badge.svg?branch=main)](https://coveralls.io/github/em-gei/swam-backend?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/em-gei/swam-backend/badge.svg?branch=develop)](https://coveralls.io/github/em-gei/swam-backend?branch=develop)
 
 
--- add coverage badge
+
 
 ## MongoDb
 To log into MongoDb container as admin:
