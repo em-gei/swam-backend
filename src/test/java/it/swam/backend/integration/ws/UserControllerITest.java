@@ -18,6 +18,7 @@ import it.swam.backend.dto.UserResponseDto;
 import it.swam.backend.exception.NotFoundException;
 import it.swam.backend.service.UserService;
 import it.swam.backend.ws.UserController;
+import java.util.Arrays;
 import java.util.stream.Stream;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
@@ -140,6 +141,40 @@ public class UserControllerITest extends BaseTest {
             .andExpect(jsonPath("$.email").value(USER_EMAIL))
             .andExpect(jsonPath("$.active").value(true))
             .andExpect(jsonPath("$.postCount").value(1));
+    }
+
+    @SneakyThrows
+    @Test
+    void getUserList_missingAuth() {
+        mockMvc
+            .perform(get("/users", USER_ID)
+                .contentType(APPLICATION_JSON))
+            .andExpect(status().isUnauthorized());
+    }
+
+    @SneakyThrows
+    @Test
+    @WithMockUser(username = "user", password = "pass")
+    void getUserList() {
+        UserResponseDto userResponseDto = UserResponseDto
+            .builder()
+            .id(USER_ID)
+            .firstname(USER_FIRSTNAME)
+            .lastname(USER_LASTNAME)
+            .email(USER_EMAIL)
+            .active(true)
+            .postCount(1)
+            .build();
+        when(service.getUsers()).thenReturn(Arrays.asList(userResponseDto));
+
+        mockMvc
+            .perform(get("/users", USER_ID).contentType(APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].firstname").value(USER_FIRSTNAME))
+            .andExpect(jsonPath("$[0].lastname").value(USER_LASTNAME))
+            .andExpect(jsonPath("$[0].email").value(USER_EMAIL))
+            .andExpect(jsonPath("$[0].active").value(true))
+            .andExpect(jsonPath("$[0].postCount").value(1));
     }
 
     @SneakyThrows

@@ -9,6 +9,7 @@ import it.swam.backend.entity.User;
 import it.swam.backend.exception.NotFoundException;
 import it.swam.backend.repository.UserRepository;
 import it.swam.backend.service.UserService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,11 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto getUser(String id) {
         var user = findUser(id);
         return userDtoMapper.toDto(user);
+    }
+
+    @Override
+    public List<UserResponseDto> getUsers() {
+        return userDtoMapper.toDtoList(userRepository.findAll());
     }
 
     @Override

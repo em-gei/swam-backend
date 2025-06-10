@@ -9,6 +9,7 @@ import it.swam.backend.dto.UserModifyDto;
 import it.swam.backend.dto.UserResponseDto;
 import it.swam.backend.service.UserService;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -51,6 +52,17 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserResponseDto getUser(@PathVariable String id) {
         return service.getUser(id);
+    }
+
+    @Operation(summary = "Get all users")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "400", description = "Invalid parameter"),
+        @ApiResponse(responseCode = "500", description = "Internal error")
+    })
+    @GetMapping(headers = "Accept=application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserResponseDto> getUsers() {
+        return service.getUsers();
     }
 
     @Operation(summary = "Delete user")
